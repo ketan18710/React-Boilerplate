@@ -2,7 +2,8 @@
  * @description Validation helpers deals with all types of in app validation
  */
 
-import { LOGIN_FORM_CONSTANTS,REGISTER_FORM_CONSTANTS} from 'utils/constants';
+import {LOGIN_FORM_CONSTANTS,FORM_ERROR_MESSAGES,REGISTER_FORM_CONSTANTS} from 'utils/constants';
+
 const errorValidation = {};
 
 const ValidationHelpers = {
@@ -51,13 +52,6 @@ const ValidationHelpers = {
     }
     return null;
   },
-  confirmPAssword : (pass,confirm)=>{
-    debugger
-    if(pass !== confirm){
-      return FORM_ERROR_MESSAGES.PASSWORD_UNMATCH;
-    }
-    return null;
-  },
   checkNumber : value =>{
     const regex = /^[0-9]{0,}$/;
     if (value && !regex.test(String(value).toLowerCase())) {
@@ -85,6 +79,13 @@ const ValidationHelpers = {
     }
     return null;
   },
+  confirmPAssword : (pass,confirm)=>{
+    debugger
+    if(pass !== confirm){
+      return FORM_ERROR_MESSAGES.PASSWORD_UNMATCH;
+    }
+    return null;
+  },
   checkDomain : value => {
     const regex = /^((?:(?:(?:\w[\.\-\+]?)*)\w)+)((?:(?:(?:\w[\.\-\+]?){0,62})\w)+)\.(\w{2,6})$/;
     if (value && !regex.test(String(value).toLowerCase())){
@@ -93,20 +94,20 @@ const ValidationHelpers = {
   },
   handleLoginFormValidation(values) {
     const errors = {};
-    errors[LOGIN_FORM_CONSTANTS.EMAIL] = this.isRequired(values[LOGIN_FORM_CONSTANTS.EMAIL]) || this.checkEmail(values[LOGIN_FORM_CONSTANTS.EMAIL]);
-    errors[LOGIN_FORM_CONSTANTS.PASSWORD] = this.isRequired(values[LOGIN_FORM_CONSTANTS.PASSWORD]) || this.checkPassword(values[LOGIN_FORM_CONSTANTS.PASSWORD]);
-    return errors;
+    errors[LOGIN_FORM_CONSTANTS.USERNAME] = this.isEmpty(values[LOGIN_FORM_CONSTANTS.USERNAME]);
+    errors[LOGIN_FORM_CONSTANTS.PASSWORD] = this.isEmpty(values[LOGIN_FORM_CONSTANTS.PASSWORD]) || this.checkPassword(values[LOGIN_FORM_CONSTANTS.PASSWORD]);
+    return errors; 
   },
   handleRegisterFormValidation(values) {
     const errors = {};
-    errors[REGISTER_FORM_CONSTANTS.FIRSTNAME] = this.isRequired(values[REGISTER_FORM_CONSTANTS.EMAIL]) ;
-    errors[REGISTER_FORM_CONSTANTS.LASTNAME] = this.isRequired(values[REGISTER_FORM_CONSTANTS.EMAIL]) ;
-    errors[REGISTER_FORM_CONSTANTS.PHONE] = this.isRequired(values[REGISTER_FORM_CONSTANTS.EMAIL]) || this.checkPhoneNumber(values[REGISTER_FORM_CONSTANTS.EMAIL]);
+    errors[REGISTER_FORM_CONSTANTS.FIRSTNAME] = this.isRequired(values[REGISTER_FORM_CONSTANTS.FIRSTNAME]) ;
+    errors[REGISTER_FORM_CONSTANTS.LASTNAME] = this.isRequired(values[REGISTER_FORM_CONSTANTS.LASTNAME]) ;
+    errors[REGISTER_FORM_CONSTANTS.PHONE] = this.isRequired(values[REGISTER_FORM_CONSTANTS.PHONE]) || this.checkPhoneNumber(values[REGISTER_FORM_CONSTANTS.PHONE]);
     errors[REGISTER_FORM_CONSTANTS.EMAIL] = this.isRequired(values[REGISTER_FORM_CONSTANTS.EMAIL]) || this.checkEmail(values[REGISTER_FORM_CONSTANTS.EMAIL]);
-    errors[REGISTER_FORM_CONSTANTS.PASSWORD] = this.isRequired(values[LOGIN_FORM_CONSTANTS.PASSWORD]) || this.checkPassword(values[LOGIN_FORM_CONSTANTS.PASSWORD]);
-    errors[REGISTER_FORM_CONSTANTS.CONFIRM_PASS] = this.isRequired(values[LOGIN_FORM_CONSTANTS.CONFIRM_PASS]) || this.confirmPAssword(values[LOGIN_FORM_CONSTANTS.PASSWORD],values[LOGIN_FORM_CONSTANTS.CONFIRM_PASS]);
+    errors[REGISTER_FORM_CONSTANTS.PASSWORD] = this.isRequired(values[REGISTER_FORM_CONSTANTS.PASSWORD]) || this.checkPassword(values[REGISTER_FORM_CONSTANTS.PASSWORD]);
+    errors[REGISTER_FORM_CONSTANTS.CONFIRM_PASS] = this.isRequired(values[REGISTER_FORM_CONSTANTS.CONFIRM_PASS]) || this.confirmPAssword(values[REGISTER_FORM_CONSTANTS.PASSWORD],values[REGISTER_FORM_CONSTANTS.CONFIRM_PASS]);
     return errors;
-  },
-};
+  }, 
+}; 
 
 export default ValidationHelpers;

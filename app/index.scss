@@ -1,0 +1,12 @@
+@import './styles/main.scss';
+#app{
+  height: 100vh;
+  min-height: 100vh;
+  min-width: 100%;
+  // font-family: $font-family;
+  .main_app_box {
+    height: 100%;
+    // display: flex;
+    width:100%;
+  }
+}

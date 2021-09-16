@@ -1,0 +1,31 @@
+@import '../../../styles/main.scss';
+.RegisterComponent{
+  // width: 100%;
+  // height: 100%;
+  @include centreAlign;
+  .RegisterComponentForm{
+    width: 300px;
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    @media screen and (max-width : 350px) {
+      width: 80%;
+    }
+    .links{
+      color: $blue;
+      margin: 0.5rem 0;
+    }
+    .MuiFormControl-root{
+      width: 100%;
+      margin: 6px 0;
+    }
+    .MuiFormLabel-root{
+      font-size: 20px;
+      font-weight: 600;
+    }
+    .RegisterComponentFormSubmit{
+      width: 100%;
+      margin-top: 1.5rem; 
+    }
+  }
+}

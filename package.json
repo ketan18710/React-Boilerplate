@@ -65,6 +65,8 @@
   },
   "dependencies": {
     "@babel/polyfill": "7.4.3",
+    "@material-ui/core": "^4.11.4",
+    "@material-ui/icons": "^4.11.2",
     "@tinymce/tinymce-react": "^3.12.2",
     "aws-sdk": "^2.881.0",
     "chalk": "^2.4.2",
@@ -90,6 +92,7 @@
     "prop-types": "15.7.2",
     "raw-loader": "^4.0.2",
     "react": "16.8.6",
+    "react-ace": "^9.4.1",
     "react-dom": "16.8.6",
     "react-helmet": "6.0.0-beta",
     "react-intl": "2.8.0",

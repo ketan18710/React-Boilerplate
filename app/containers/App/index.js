@@ -22,10 +22,7 @@ import reducer from './reducer';
 import saga from './saga';
 import { Switch, Route } from 'react-router-dom';
 import './style.scss';
-import {APP_ROUTES} from 'utils/constants'
-import Error404 from 'components/Error404';
-import Loader from 'components/Loader';
-
+import AppRoutes from './routes';
 export function App(props) {
   const {fetchData,data} = props
   useInjectReducer({ key: 'app', reducer });
@@ -37,39 +34,24 @@ export function App(props) {
   }, [])
   return (
     <>
-      <Helmet
-        titleTemplate="%s - Website Title"
-        defaultTitle="Website Title"
-      >
-        <meta name="description" content="Website Title" />
-      </Helmet>
-      <>
-        {
-          loading ?
-          <Loader />:
-          <>
-          <ToastContainer
+      {/* <ToastContainer /> */}
+      <div className='main_app_box'>
+        <ToastContainer
               position="top-right"
               hideProgressBar
-              autoClose={1000}
+              autoClose={3000}
               newestOnTop={false}
               closeOnClick
               rtl={false}
               pauseOnFocusLoss
               draggable
               pauseOnHover
-          />
-            <div id="mainBody">
-                <Switch>
-                  <Route exact path={APP_ROUTES.HOME} component={()=><h1>Home Page</h1>} />
-                  <Route component={Error404} />
-                </Switch>
-              </div>
-          <ToastContainer />
-          </>
-        }
-      </>
-    </>     
+        />
+        
+        <AppRoutes 
+        />
+      </div>
+    </>
   );
 }
 
